@@ -8,7 +8,9 @@ const b = some('b');
 const c = none;
 ```
 
-## None check
+## isNone
+
+Checks whether the value of the Option is none. If so, true is returned. Otherwise, false.
 
 ```TypeScript
 const a = maybe(null);
@@ -24,7 +26,9 @@ if (!isNone(b)) {
 }
 ```
 
-## Get value
+## value
+
+Accessing the value of the Option.
 
 ```TypeScript
 const a = maybe('a');
@@ -38,16 +42,17 @@ const b = value(some('b')); // b == 'b'
 const c = value(none); // c == undefined
 ```
 
-## Get value with fallback value when isNone is true
+## getOrElse
+Gets the value of the Option or a fallback value when the Option is none.
 
 ```TypeScript
 const a = getOrElse('')(some('a')); // a === 'a'
 const b = getOrElse('')(none); // b === '' (fallback value is returned);
 ```
 
-## Get Property of object
+## getProp
 
-Get a property of an object as another Option.
+Get a property of a complex object and return the value as another Option.
 
 ```TypeScript
 const a = maybe({ b: 'b' });
@@ -58,7 +63,9 @@ if (!isNone(b)) {
 }
 ```
 
-## Get property value with fallback value when isNone is true
+## getPropOrElse
+
+Get a the value of a property of an complex object or a fallback value when the value is none.
 
 ```TypeScript
 const a = getPropOrElse('', _ => _.value)({ value: 'a' }); // a == 'a'

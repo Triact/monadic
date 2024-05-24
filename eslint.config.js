@@ -10,6 +10,10 @@ export default tseslint.config(
     ...[{
         ignores: [
             'dist',
-        ],
+        ]
+    }, {
+        rules: {
+            'no-trailing-spaces': "error"
+        }
     }]
 );

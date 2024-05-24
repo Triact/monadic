@@ -20,7 +20,7 @@ export type Value = <A>(x: Option<A>) => A | undefined;
 export const value: Value = <A>(x: Option<A>) => (isNone(x) ? undefined : x.value);
 
 type IsNoneOrEmpty = (x: Option<string>) => boolean;
-export const isNoneOrEmpty: IsNoneOrEmpty = (x: Option<string>): x is None => isNone(x) || x.value.length === 0;       
+export const isNoneOrEmpty: IsNoneOrEmpty = (x: Option<string>): x is None => isNone(x) || x.value.length === 0;
 
 /* Compose friendly functions */
 

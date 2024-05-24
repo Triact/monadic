@@ -97,8 +97,7 @@
 <a name='L32'></a><a href='#L32'>32</a>
 <a name='L33'></a><a href='#L33'>33</a>
 <a name='L34'></a><a href='#L34'>34</a>
-<a name='L35'></a><a href='#L35'>35</a>
-<a name='L36'></a><a href='#L36'>36</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L35'></a><a href='#L35'>35</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -109,65 +108,63 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">25x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">21x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&nbsp;
-export interface Some&lt;A&gt; {
-    _tag: 'Some',
-    value: A
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export interface Some&lt;A&gt; {
+  _tag: 'Some';
+  value: A;
 }
 &nbsp;
-export interface None { 
-    _tag: 'None'
+export interface None {
+  _tag: 'None';
 }
 &nbsp;
 export type Option&lt;A&gt; = Some&lt;A&gt; | None;
 &nbsp;
 export const some = &lt;A&gt;(x: A): Option&lt;A&gt; =&gt; ({ _tag: 'Some', value: x });
 export const none: Option&lt;never&gt; = { _tag: 'None' };
-export const maybe = &lt;A&gt;(x: A | undefined | null): Option&lt;A&gt; =&gt; x === undefined || x === null ? none : some(x); 
+export const maybe = &lt;A&gt;(x: A | undefined | null): Option&lt;A&gt; =&gt; (x === undefined || x === null ? none : some(x));
 &nbsp;
 type IsNone = &lt;A&gt;(x: Option&lt;A&gt;) =&gt; x is None;
 export const isNone: IsNone = &lt;A&gt;(x: Option&lt;A&gt;): x is None =&gt; x._tag === 'None';
 &nbsp;
 export type Value = &lt;A&gt;(x: Option&lt;A&gt;) =&gt; A | undefined;
-export const value: Value = &lt;A&gt;(x: Option&lt;A&gt;) =&gt; isNone(x) ? undefined : x.value;
+export const value: Value = &lt;A&gt;(x: Option&lt;A&gt;) =&gt; (isNone(x) ? undefined : x.value);
 &nbsp;
 type IsNoneOrEmpty = (x: Option&lt;string&gt;) =&gt; boolean;
-export const isNoneOrEmpty: IsNoneOrEmpty = (x: Option&lt;string&gt;) : x is None =&gt; isNone(x) || x.value.length === 0;
+export const isNoneOrEmpty: IsNoneOrEmpty = (x: Option&lt;string&gt;): x is None =&gt; isNone(x) || x.value.length === 0;
 &nbsp;
 /* Compose friendly functions */
 &nbsp;
-type GetProp = &lt;A, B&gt;(cb: (a: A) =&gt; B) =&gt; (a: Option&lt;A&gt;) =&gt; Option&lt;B&gt;; 
-export const getProp: GetProp = (cb) =&gt; (a) =&gt; isNone(a) ? none : maybe(cb(a.value)); 
+type GetProp = &lt;A, B&gt;(cb: (a: A) =&gt; B) =&gt; (a: Option&lt;A&gt;) =&gt; Option&lt;B&gt;;
+export const getProp: GetProp = (cb) =&gt; (a) =&gt; (isNone(a) ? none : maybe(cb(a.value)));
 &nbsp;
 type GetOrElse = &lt;A&gt;(fallback: A) =&gt; (x: Option&lt;A&gt;) =&gt; A;
-export const getOrElse: GetOrElse = (e) =&gt; (x) =&gt; isNone(x) ? e : x.value;
+export const getOrElse: GetOrElse = (e) =&gt; (x) =&gt; (isNone(x) ? e : x.value);
 &nbsp;
 type GetPropOrElse = &lt;A, B&gt;(e: B, cb: (x: A) =&gt; B | undefined) =&gt; (x: Option&lt;A&gt;) =&gt; B | undefined;
-export const getPropOrElse: GetPropOrElse = (e, cb) =&gt; (x) =&gt; isNone(x) ? e : getOrElse(e)(maybe(cb(x.value)));
+export const getPropOrElse: GetPropOrElse = (e, cb) =&gt; (x) =&gt; (isNone(x) ? e : getOrElse(e)(maybe(cb(x.value))));
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -175,7 +172,7 @@ export const getPropOrElse: GetPropOrElse = (e, cb) =&gt; (x) =&gt; isNone(x) ? 
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-05-23T20:24:53.162Z
+                at 2024-05-24T20:36:29.383Z
             </div>
         <script src="prettify.js"></script>
         <script>

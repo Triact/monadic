@@ -107,6 +107,22 @@ describe('option', () => {
     expect(x).toBe(b);
   });
 
+  test('getPropOrElse(else)({ value: null }, e => e.value) ==> else', () => {
+    interface A { value: string | null }
+    const a: Option<A> = some({ value: null });
+    const b = '';
+    const x = getPropOrElse<A, string | null>(b, (e) => e.value)(a);
+    expect(x).toBe(b);
+  });
+
+  test('getPropOrElse(else)({ value: undefined }, e => e.value) ==> else', () => {
+    interface A { value: string | undefined }
+    const a: Option<A> = some({ value: undefined });
+    const b = '';
+    const x = getPropOrElse<A, string | undefined>(b, (e) => e.value)(a);
+    expect(x).toBe(b);
+  });
+
   test('getOrElse(else)(none) => else', () => {
     const a = none;
     const b = '';

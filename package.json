@@ -1,5 +1,5 @@
 {
-  "name": "monadic",
+  "name": "@triact/monadic",
   "version": "0.1.0",
   "description": "Collection of reusable Monads",
   "main": "index.js",
@@ -9,7 +9,8 @@
     "test": "npx jest --coverage",
     "format": "prettier --write \"**/*.ts\"",
     "lint": "npx eslint .",
-    "lint:fix": "npx eslint . --fix"
+    "lint:fix": "npx eslint . --fix",
+    "publis": "npm publish --access public"
   },
   "author": "Triact",
   "license": "Apache 2.0",

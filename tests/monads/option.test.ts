@@ -71,7 +71,7 @@ describe('option', () => {
   });
 
   test('getProp(some, e => e.value) ==> some.value', () => {
-    type A = { value: string };
+    interface A { value: string }
     const a: A = {
       value: 'a',
     };
@@ -84,14 +84,14 @@ describe('option', () => {
   });
 
   test('getProp(e => e.value)(none) ==> none', () => {
-    type A = { value: string };
+    interface A { value: string }
     const a: Option<A> = none;
     const x = getProp<A, string>((e) => e.value)(a);
     expect(isNone(x)).toBe(true);
   });
 
   test('getPropOrElse(b)(some, e => e.value) ==> some.value', () => {
-    type A = { value: string };
+    interface A { value: string }
     const a: Option<A> = some({
       value: 'a',
     });

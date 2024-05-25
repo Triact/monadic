@@ -1,8 +1,8 @@
 import {
   Option,
-  getOrElse,
-  getProp,
-  getPropOrElse,
+  valueOrElse,
+  prop,
+  propValueOrElse,
   isNone,
   isNoneOrEmpty,
   maybe,
@@ -70,12 +70,12 @@ describe('option', () => {
     expect(isNoneOrEmpty(x)).toBe(true);
   });
 
-  test('getProp(some, e => e.value) ==> some.value', () => {
+  test('prop(some, e => e.value) ==> some.value', () => {
     interface A { value: string }
     const a: A = {
       value: 'a',
     };
-    const x = getProp<A, string>((e) => e.value)(some(a));
+    const x = prop<A, string>((e) => e.value)(some(a));
     expect(isNone(x)).toBe(false);
 
     if (!isNone(x)) {
@@ -83,57 +83,57 @@ describe('option', () => {
     }
   });
 
-  test('getProp(e => e.value)(none) ==> none', () => {
+  test('prop(e => e.value)(none) ==> none', () => {
     interface A { value: string }
     const a: Option<A> = none;
-    const x = getProp<A, string>((e) => e.value)(a);
+    const x = prop<A, string>((e) => e.value)(a);
     expect(isNone(x)).toBe(true);
   });
 
-  test('getPropOrElse(b)(some, e => e.value) ==> some.value', () => {
+  test('propValueOrElse(b)(some, e => e.value) ==> some.value', () => {
     interface A { value: string }
     const a: Option<A> = some({
       value: 'a',
     });
     const b = '';
-    const x = getPropOrElse<A, string>(b, (e) => e.value)(a);
+    const x = propValueOrElse<A, string>(b, (e) => e.value)(a);
     expect(x).toBe('a');
   });
 
-  test('getPropOrElse(else)(none, e => e.value) ==> else', () => {
+  test('propValueOrElse(else)(none, e => e.value) ==> else', () => {
     const a: Option<{ value: string }> = none;
     const b = '';
-    const x = getPropOrElse<{ value: string }, string>(b, (e) => e.value)(a);
+    const x = propValueOrElse<{ value: string }, string>(b, (e) => e.value)(a);
     expect(x).toBe(b);
   });
 
-  test('getPropOrElse(else)({ value: null }, e => e.value) ==> else', () => {
+  test('propValueOrElse(else)({ value: null }, e => e.value) ==> else', () => {
     interface A { value: string | null }
     const a: Option<A> = some({ value: null });
     const b = '';
-    const x = getPropOrElse<A, string | null>(b, (e) => e.value)(a);
+    const x = propValueOrElse<A, string | null>(b, (e) => e.value)(a);
     expect(x).toBe(b);
   });
 
-  test('getPropOrElse(else)({ value: undefined }, e => e.value) ==> else', () => {
+  test('propValueOrElse(else)({ value: undefined }, e => e.value) ==> else', () => {
     interface A { value: string | undefined }
     const a: Option<A> = some({ value: undefined });
     const b = '';
-    const x = getPropOrElse<A, string | undefined>(b, (e) => e.value)(a);
+    const x = propValueOrElse<A, string | undefined>(b, (e) => e.value)(a);
     expect(x).toBe(b);
   });
 
-  test('getOrElse(else)(none) => else', () => {
+  test('valueOrElse(else)(none) => else', () => {
     const a = none;
     const b = '';
-    const x = getOrElse(b)(a);
+    const x = valueOrElse(b)(a);
     expect(x).toBe(b);
   });
 
-  test('getOrElse(else)(some(a)) => a', () => {
+  test('valueOrElse(else)(some(a)) => a', () => {
     const a = some('a');
     const b = '';
-    const x = getOrElse(b)(a);
+    const x = valueOrElse(b)(a);
     expect(x).toBe('a');
   });
 });

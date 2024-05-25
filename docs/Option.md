@@ -42,34 +42,34 @@ const b = value(some('b')); // b == 'b'
 const c = value(none); // c == undefined
 ```
 
-## getOrElse
+## valueOrElse
 Gets the value of the Option or a fallback value when the Option is none.
 
 ```TypeScript
-const a = getOrElse('')(some('a')); // a === 'a'
-const b = getOrElse('')(none); // b === '' (fallback value is returned);
+const a = valueOrElse('')(some('a')); // a === 'a'
+const b = valueOrElse('')(none); // b === '' (fallback value is returned);
 ```
 
-## getProp
+## prop
 
 Get a property of a complex object and return the value as another Option.
 
 ```TypeScript
 const a = maybe({ b: 'b' });
-const b = getProp(_ => _.b)(a); // result is Option<T>
+const b = prop(_ => _.b)(a); // result is Option<T>
 if (!isNone(b)) {
     // this code is executed
     const value = b.value; // value === 'b'
 }
 ```
 
-## getPropOrElse
+## propOrElse
 
 Get a the value of a property of an complex object or a fallback value when the value is none.
 
 ```TypeScript
-const a = getPropOrElse('', _ => _.value)({ value: 'a' }); // a == 'a'
-const b = getPropOrElse('', _ => _.value)(none); // b == '' (fallback value is returned)
-const c = getPropOrElse('', _ => _.value)({ value: null }); // c == '' (fallback value is returned)
-const d = getPropOrElse('', _ => _.value)({ value: undefined }); // d == '' (fallback value is returned)
+const a = propOrElse('', _ => _.value)({ value: 'a' }); // a == 'a'
+const b = propOrElse('', _ => _.value)(none); // b == '' (fallback value is returned)
+const c = propOrElse('', _ => _.value)({ value: null }); // c == '' (fallback value is returned)
+const d = propOrElse('', _ => _.value)({ value: undefined }); // d == '' (fallback value is returned)
 ```

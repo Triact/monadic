@@ -1,3 +1,1 @@
-export function hello() {
-  console.log('Hello, world!');
-}
+export * from './monads/option';

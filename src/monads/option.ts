@@ -1,10 +1,10 @@
 export interface Some<A> {
-  _tag: 'Some';
-  value: A;
+   _tag: 'Some';
+   value: A;
 }
 
 export interface None {
-  _tag: 'None';
+   _tag: 'None';
 }
 
 export type Option<A> = Some<A> | None;

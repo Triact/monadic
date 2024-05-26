@@ -1,29 +1,46 @@
-/**
- * Either a left or right value is set.
- * Useful when transforming "partial" functions into "total".
- * For example: by using Either<string, A> you can return a left("error message") in case of en error and right(a: A) in case of valid output.
- */
-export type Either<E, A> = Left<E> | Right<A>;
+export type Either<L, R> = ILeft<L> | IRight<R>;
 
-export interface Left<E> {
-  _tag: 'Left';
-  left: E;
+export interface IEither {
+   isLeft: () => boolean;
+   isRight: () => boolean;
 }
 
-export interface Right<A> {
-  _tag: 'Right';
-  right: A;
+export interface ILeft<L> extends IEither{
+   _tag: 'Left';
+   left: L;
 }
 
-export const left = <E, A = never>(e: E): Either<E, A> => ({
-  _tag: 'Left',
-  left: e,
-});
+export interface IRight<R> extends IEither {
+   _tag: 'Right';
+   right: R;
+}
 
-export const right = <A, E = never>(a: A): Either<E, A> => ({
-  _tag: 'Right',
-  right: a,
-});
+class Left<L> implements ILeft<L> {
+   _tag: "Left" = 'Left';
+   left: L;
 
-export const isLeft = <E, A>(x: Either<E, A>): x is Left<E> => x._tag === 'Left';
-export const isRight = <E, A>(x: Either<E, A>): x is Right<A> => x._tag === 'Right';
+   constructor(l: L) {
+      this.left = l;
+   }
+   
+   isLeft = () => true;
+   isRight = () => false;
+}
+
+class Right<R> implements IRight<R> {
+   _tag: "Right" = 'Right';
+   right: R;
+
+   constructor(r: R) {
+      this.right = r;
+   }
+   
+   isLeft = () => false;
+   isRight = () => true;
+}
+
+export const left = <L, R = never>(l: L): Either<L, R> => new Left(l);
+export const right = <R, L = never>(r: R): Either<L, R> => new Right(r);
+
+export const isLeft = <L, R>(x: Either<L, R>): x is ILeft<L> => x._tag === 'Left';
+export const isRight = <L, R>(x: Either<L, R>): x is IRight<R> => x._tag === 'Right';

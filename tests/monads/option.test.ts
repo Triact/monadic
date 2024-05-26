@@ -71,7 +71,9 @@ describe('option', () => {
   });
 
   test('prop(some, e => e.value) ==> some.value', () => {
-    interface A { value: string }
+    interface A {
+      value: string;
+    }
     const a: A = {
       value: 'a',
     };
@@ -84,14 +86,18 @@ describe('option', () => {
   });
 
   test('prop(e => e.value)(none) ==> none', () => {
-    interface A { value: string }
+    interface A {
+      value: string;
+    }
     const a: Option<A> = none;
     const x = prop<A, string>((e) => e.value)(a);
     expect(isNone(x)).toBe(true);
   });
 
   test('propValueOrElse(b)(some, e => e.value) ==> some.value', () => {
-    interface A { value: string }
+    interface A {
+      value: string;
+    }
     const a: Option<A> = some({
       value: 'a',
     });
@@ -108,7 +114,9 @@ describe('option', () => {
   });
 
   test('propValueOrElse(else)({ value: null }, e => e.value) ==> else', () => {
-    interface A { value: string | null }
+    interface A {
+      value: string | null;
+    }
     const a: Option<A> = some({ value: null });
     const b = '';
     const x = propValueOrElse<A, string | null>(b, (e) => e.value)(a);
@@ -116,7 +124,9 @@ describe('option', () => {
   });
 
   test('propValueOrElse(else)({ value: undefined }, e => e.value) ==> else', () => {
-    interface A { value: string | undefined }
+    interface A {
+      value: string | undefined;
+    }
     const a: Option<A> = some({ value: undefined });
     const b = '';
     const x = propValueOrElse<A, string | undefined>(b, (e) => e.value)(a);

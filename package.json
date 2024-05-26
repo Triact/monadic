@@ -1,6 +1,6 @@
 {
   "name": "@triact/monadic",
-  "version": "0.2.7",
+  "version": "0.2.10",
   "description": " TypeScript library offering a comprehensive collection of monads to simplify functional programming.",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
@@ -24,13 +24,13 @@
     "url": "https://github.com/Triact/monadic"
   },
   "scripts": {
-    "clean": "if exist ./dist rd -r ./dist",
+    "clean": "if exist \"./dist\" rd /s /q \"./dist\"",
     "build": "npm run clean && npx tsc",
     "test": "npx jest --coverage",
     "format": "prettier --write \"**/*.ts\"",
     "lint": "npx eslint .",
     "lint:fix": "npx eslint . --fix",
-    "deploy": "npm publish --access public"
+    "deploy": "npm run build && npm publish --access public"
   },
   "author": "Triact",
   "license": "Apache 2.0",

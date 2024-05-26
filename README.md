@@ -18,5 +18,5 @@ npm install @triact/monadic
 
 ## Monads
 
-[Option](./docs/Option.md)
-
+[Option](./docs/option.md)
+[Either](./docs/either.md)

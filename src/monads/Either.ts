@@ -5,7 +5,7 @@ export interface IEither {
    isRight: () => boolean;
 }
 
-export interface ILeft<L> extends IEither{
+export interface ILeft<L> extends IEither {
    _tag: 'Left';
    left: L;
 }
@@ -16,25 +16,25 @@ export interface IRight<R> extends IEither {
 }
 
 class Left<L> implements ILeft<L> {
-   _tag: "Left" = 'Left';
+   _tag: 'Left' = 'Left' as const;
    left: L;
 
    constructor(l: L) {
       this.left = l;
    }
-   
+
    isLeft = () => true;
    isRight = () => false;
 }
 
 class Right<R> implements IRight<R> {
-   _tag: "Right" = 'Right';
+   _tag: 'Right' = 'Right' as const;
    right: R;
 
    constructor(r: R) {
       this.right = r;
    }
-   
+
    isLeft = () => false;
    isRight = () => true;
 }

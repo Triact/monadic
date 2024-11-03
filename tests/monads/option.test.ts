@@ -9,7 +9,7 @@ import {
    none,
    some,
    value,
-} from '../../src/monads/Option';
+} from '../../src/monads/Option1';
 
 describe('option', () => {
    test('some', () => {

@@ -1,20 +1,20 @@
-import { either } from '../../src/index';
+import { isLeft, isRight, left, right } from "../../src/Either";
 
 describe('either', () => {
    test('left', () => {
-      const x = either.left('error');
+      const x = left('error');
 
-      expect(either.isLeft(x)).toBe(true);
-      expect(either.isRight(x)).toBe(false);
+      expect(isLeft(x)).toBe(true);
+      expect(isRight(x)).toBe(false);
       expect(x.isLeft()).toBe(true);
       expect(x.isRight()).toBe(false);
    });
 
    test('right', () => {
-      const x = either.right('success');
+      const x = right('success');
 
-      expect(either.isLeft(x)).toBe(false);
-      expect(either.isRight(x)).toBe(true);
+      expect(isLeft(x)).toBe(false);
+      expect(isRight(x)).toBe(true);
       expect(x.isLeft()).toBe(false);
       expect(x.isRight()).toBe(true);
    });

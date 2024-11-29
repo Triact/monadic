@@ -1,2 +1,5 @@
-export * as option from './monads/Option';
-export * as either from './monads/Either';
+export * from './Compose';
+export * from './Either';
+export * from './Equals';
+export * from './Option';
+

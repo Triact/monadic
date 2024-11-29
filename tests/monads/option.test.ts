@@ -1,15 +1,15 @@
 import {
    Option,
-   valueOrElse,
+   getOrElse,
    prop,
-   propValueOrElse,
+   getPropOrElse,
    isNone,
    isNoneOrEmpty,
    maybe,
    none,
    some,
    value,
-} from '../../src/monads/Option';
+} from '../../src/Option';
 
 describe('option', () => {
    test('some', () => {
@@ -102,14 +102,14 @@ describe('option', () => {
          value: 'a',
       });
       const b = '';
-      const x = propValueOrElse<A, string>(b, (e) => e.value)(a);
+      const x = getPropOrElse<A, string>(b, (e) => e.value)(a);
       expect(x).toBe('a');
    });
 
    test('propValueOrElse(else)(none, e => e.value) ==> else', () => {
       const a: Option<{ value: string }> = none;
       const b = '';
-      const x = propValueOrElse<{ value: string }, string>(b, (e) => e.value)(a);
+      const x = getPropOrElse<{ value: string }, string>(b, (e) => e.value)(a);
       expect(x).toBe(b);
    });
 
@@ -119,7 +119,7 @@ describe('option', () => {
       }
       const a: Option<A> = some({ value: null });
       const b = '';
-      const x = propValueOrElse<A, string | null>(b, (e) => e.value)(a);
+      const x = getPropOrElse<A, string | null>(b, (e) => e.value)(a);
       expect(x).toBe(b);
    });
 
@@ -129,21 +129,21 @@ describe('option', () => {
       }
       const a: Option<A> = some({ value: undefined });
       const b = '';
-      const x = propValueOrElse<A, string | undefined>(b, (e) => e.value)(a);
+      const x = getPropOrElse<A, string | undefined>(b, (e) => e.value)(a);
       expect(x).toBe(b);
    });
 
    test('valueOrElse(else)(none) => else', () => {
       const a = none;
       const b = '';
-      const x = valueOrElse(b)(a);
+      const x = getOrElse(b)(a);
       expect(x).toBe(b);
    });
 
    test('valueOrElse(else)(some(a)) => a', () => {
       const a = some('a');
       const b = '';
-      const x = valueOrElse(b)(a);
+      const x = getOrElse(b)(a);
       expect(x).toBe('a');
    });
 });

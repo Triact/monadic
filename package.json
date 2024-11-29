@@ -1,9 +1,14 @@
 {
   "name": "@triact/monadic",
-  "version": "0.3.0",
+  "version": "0.4.0-alpha.5",
   "description": " TypeScript library offering a comprehensive collection of monads to simplify functional programming.",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
+  "exports": {
+    ".": "./dist/src/index.js",
+    "./Either": "./dist/src/Either.js",
+    "./Option": "./dist/src/Option.js"    
+  },
   "type": "module",
   "files": [
     "dist/src/**/*"

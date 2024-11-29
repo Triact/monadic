@@ -12,11 +12,15 @@ This TypeScript library provides a robust collection of monads to streamline and
 
 ## Installation
 
+To use these utilities in your project, install the library:
+
 ```shell
 npm install @triact/monadic
 ```
 
 ## Monads
 
-- [Option](./docs/Option.md)
+- [Compose](./docs/Compose.md)
 - [Either](./docs/Either.md)
+- [Option](./docs/Option.md)
+

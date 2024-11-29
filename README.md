@@ -22,5 +22,5 @@ npm install @triact/monadic
 
 - [Compose](./docs/Compose.md)
 - [Either](./docs/Either.md)
+- [Map](./docs/Map.md)
 - [Option](./docs/Option.md)
-
